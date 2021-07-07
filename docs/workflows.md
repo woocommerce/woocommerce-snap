@@ -9,7 +9,7 @@ npm run snap:merchant
 If you want to just run a single flow, you can use the command below, where you just pass in the file name of the flow you want to run:
 
 ```
-npm run snap:merchant: merchant.test.js
+npm run snap:merchant merchant.test.js
 ```
 
 ## Workflow building
@@ -32,10 +32,10 @@ The full list of merchant flows that are available can be found [here](https://g
 If writing your own capture script for a merchant workflow, you can use the `dismissAllNotices()` helper method to remove any WooCommerce notices in WP Admin (such as the SSL warning and the regenerating thumbnails message) that show in the local environment. For example, this can be added to the `beforeAll() {}` setup as below:
 
 ```javascript
-    beforeAll(async () => {
-        await merchant.login();
-        await dismissAllNotices();
-    });
+beforeAll(async () => {
+    await merchant.login();
+    await dismissAllNotices();
+});
 ```
 
 ### Shopper flows
