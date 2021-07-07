@@ -48,7 +48,7 @@ const runUrlsScreenshotter = () => {
 					await page.goto( config.get( 'url' ) + p.url, {
 						waitUntil: ['load', 'networkidle0', 'domcontentloaded'],
 					});
-					await takeScreenshot(`screenshot-${ p.name }`);
+					await takeScreenshot( { fileName: `screenshot-${ p.name }` });
 					index += 1;
 				} );
 			}
