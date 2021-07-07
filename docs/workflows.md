@@ -12,7 +12,7 @@ If you want to just run a single flow, you can use the command below, where you 
 npm run snap:merchant: merchant.test.js
 ```
 
-## Workflow bilding
+## Workflow building
 
 One of the benefits of using the [WooCommerce e2e utils package](https://www.npmjs.com/package/@woocommerce/e2e-utils) is that we get access to a varity of useful methods, which, while intended for testing, provide useful methods for creating screenshot workflows.
 
