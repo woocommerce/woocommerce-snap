@@ -1,0 +1,36 @@
+version: "3.3"
+services:
+    db:
+      container_name: wc_snap_db
+      image: mariadb
+      volumes:
+        - db_data:/var/lib/mysql
+      restart: on-failure
+      environment:
+        MYSQL_ROOT_PASSWORD: wordpress
+        MYSQL_DATABASE: wordpress
+        MYSQL_USER: wordpress
+        MYSQL_PASSWORD: wordpress
+
+    wordpress:
+      container_name: wc_snap_wordpress
+      depends_on:
+        - db
+      build: 
+        context: .
+        args: 
+          - TAG=${WORDPRESS_VERSION}
+      ports:
+        - 8084:80
+      restart: on-failure
+      environment:
+        WORDPRESS_DB_HOST: db:3306
+        WORDPRESS_DB_NAME: wordpress
+        WORDPRESS_DB_USER: wordpress
+        WORDPRESS_DB_PASSWORD: wordpress
+      volumes:
+        - wp_data:/var/www/html
+
+volumes:
+  db_data:
+  wp_data:
