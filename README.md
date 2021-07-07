@@ -201,7 +201,7 @@ snap:shopper-dev
 
 **Using workflows**
 
-Both the Merchant and Shopper flows provide workflows that can be built rather than just visiting URLs. Please see the [Workflows page]((docs/workflows.md)) for more details on building workflows for screenshots.
+Both the Merchant and Shopper flows provide workflows that can be built rather than just visiting URLs. Please see the [Workflows page](docs/workflows.md) for more details on building workflows for screenshots.
 
 ## Screenshot methods
 
