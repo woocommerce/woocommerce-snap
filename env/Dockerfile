@@ -1,4 +1,4 @@
-ARG TAG=latest
+ARG TAG
 FROM wordpress:${TAG}
 RUN apt-get update \
 	&& apt-get install --assume-yes --quiet --no-install-recommends gnupg2 subversion mariadb-client less jq
