@@ -5,10 +5,8 @@ SITE_TITLE="WooCommerce Snap"
 if [[ -f "./env/local.env" ]]; then
 	echo "Loading local env file..."
 	ENV_FILE="./env/local.env"
-    . ./env/local.env
 else 
 	echo "Loading in default env file..."
-	. ./env/default.env
 	ENV_FILE="./env/default.env"
 fi
 
