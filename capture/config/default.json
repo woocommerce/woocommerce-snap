@@ -10,20 +10,20 @@
     }
   ],
   "viewport": {
-    "width": 1280,
-    "height": 720
+    "width": 1512,
+    "height": 982
   },
   "deviceViewport": {
     "enabled": false,
     "device": "iPhone 6"
   },
   "fullPageScreenshot": false,
-  "url": "http://localhost:8084/",
+  "url": "https://core.local/",
   "users": {
     "admin": {
       "username": "admin",
       "password": "password",
-      "email": "admin@woocommercecoree2etestsuite.com"
+      "email": "ryan.ray@automattic.com"
     },
     "customer": {
       "username": "customer",

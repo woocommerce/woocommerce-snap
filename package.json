@@ -15,7 +15,9 @@
     "snap:shopper": "NODE_CONFIG_DIR='capture/config' wp-scripts test-e2e --config capture/config/jest.config.js ./capture/shopper",
     "snap:shopper-dev": "NODE_CONFIG_DIR='capture/config' JEST_PUPPETEER_CONFIG='capture/config/jest-puppeteer.config.js' wp-scripts test-e2e --config capture/config/jest.config.js --puppeteer-interactive ./capture/shopper",
     "snap:urls": "NODE_CONFIG_DIR='capture/config' wp-scripts test-e2e --config capture/config/jest.config.js ./capture/urls",
-    "snap:urls-dev": "NODE_CONFIG_DIR='capture/config' JEST_PUPPETEER_CONFIG='capture/config/jest-puppeteer.config.js' wp-scripts test-e2e --config capture/config/jest.config.js --puppeteer-interactive ./capture/urls"
+    "snap:urls-dev": "NODE_CONFIG_DIR='capture/config' JEST_PUPPETEER_CONFIG='capture/config/jest-puppeteer.config.js' wp-scripts test-e2e --config capture/config/jest.config.js --puppeteer-interactive ./capture/urls",
+    "snap:flatrate": "NODE_CONFIG_DIR='capture/config' wp-scripts test-e2e --config capture/config/jest.config.js ./capture/flatrate",
+    "snap:flatrate-dev": "NODE_CONFIG_DIR='capture/config' JEST_PUPPETEER_CONFIG='capture/config/jest-puppeteer.config.js' wp-scripts test-e2e --config capture/config/jest.config.js --puppeteer-interactive ./capture/flatrate"
   },
   "keywords": [
     "screenshots",
