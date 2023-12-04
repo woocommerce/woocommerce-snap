@@ -1,41 +1,21 @@
 {
   "name": "woocommerce-snap",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "WooCommerce screenshot generator",
+  "main": "index.js",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/woocommerce/woocommerce-snap.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "snap:up": "./env/setup.sh",
-    "snap:down": "./env/down.sh",
-    "snap:merchant": "NODE_CONFIG_DIR='capture/config' wp-scripts test-e2e --config capture/config/jest.config.js ./capture/merchant",
-    "snap:merchant-dev": "NODE_CONFIG_DIR='capture/config' JEST_PUPPETEER_CONFIG='capture/config/jest-puppeteer.config.js' wp-scripts test-e2e --config capture/config/jest.config.js --puppeteer-interactive ./capture/merchant",
-    "snap:shopper": "NODE_CONFIG_DIR='capture/config' wp-scripts test-e2e --config capture/config/jest.config.js ./capture/shopper",
-    "snap:shopper-dev": "NODE_CONFIG_DIR='capture/config' JEST_PUPPETEER_CONFIG='capture/config/jest-puppeteer.config.js' wp-scripts test-e2e --config capture/config/jest.config.js --puppeteer-interactive ./capture/shopper",
-    "snap:urls": "NODE_CONFIG_DIR='capture/config' wp-scripts test-e2e --config capture/config/jest.config.js ./capture/urls",
-    "snap:urls-dev": "NODE_CONFIG_DIR='capture/config' JEST_PUPPETEER_CONFIG='capture/config/jest-puppeteer.config.js' wp-scripts test-e2e --config capture/config/jest.config.js --puppeteer-interactive ./capture/urls"
-  },
-  "keywords": [
-    "screenshots",
-    "woocommerce",
-    "tool"
-  ],
   "author": "Automattic",
   "license": "GPL-3.0+",
-  "dependencies": {
-    "@automattic/puppeteer-utils": "github:Automattic/puppeteer-utils",
-    "@babel/cli": "7.12.0",
-    "@babel/core": "7.12.0",
-    "@babel/polyfill": "7.11.5",
-    "@babel/preset-env": "7.12.0",
-    "@woocommerce/api": "^0.2.0",
-    "@woocommerce/e2e-utils": "^0.2.0",
-    "@wordpress/scripts": "12.4.0",
-    "dotenv": "^10.0.0",
-    "jest-puppeteer": "^5.0.4",
-    "puppeteer": "^10.1.0",
-    "shelljs": "^0.8.5"
+  "bugs": {
+    "url": "https://github.com/woocommerce/woocommerce-snap/issues"
+  },
+  "homepage": "https://github.com/woocommerce/woocommerce-snap#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.3"
   }
 }

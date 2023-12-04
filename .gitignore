@@ -25,3 +25,7 @@ node_modules/
 
 # Screenshots
 screenshots/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
