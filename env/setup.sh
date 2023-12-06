@@ -40,17 +40,8 @@ cli wp core install \
 	--admin_email="admin@woocommercesnap.com" \
 	--skip-email
 
-echo "Updating WordPress to the latest version..."
-cli wp core update --quiet
-
-echo "Updating the WordPress database..."
-cli wp core update-db --quiet
-
 echo "Updating permalink structure"
 cli wp rewrite structure '/%postname%/'
-
-echo "Installing and activating Gutenberg..."
-cli wp plugin install gutenberg --activate
 
 if [ -z "$WOOCOMMERCE_VERSION" ]
 then
@@ -90,8 +81,26 @@ cli wp plugin install wordpress-importer --activate
 echo "Importing sample products..."
 cli wp import wp-content/plugins/woocommerce/sample-data/sample_products.xml --authors=skip
 
-echo "Installing basic auth plugin for interfacing with the API..."
-cli wp plugin install https://github.com/WP-API/Basic-Auth/archive/master.zip
-cli wp plugin activate Basic-Auth
+# Hide the admin notices for cleaner screenshotting
+cli wp plugin activate silence-notices
 
-echo "Nice! The site is up and running at http://${WP_URL}/wp-admin/. Head over there to check it out :)"
+# Entirely for fun, output Woo in the brand purple
+R=173
+G=134
+B=233
+
+COLOR_CODE=$(printf "%03d" "$((16 + 36 * $R / 255 * 6 + 6 * $G / 255 + $B / 255))")
+
+banner="
+ __          __          _ 
+ \ \        / /         | |
+  \ \  /\  / /__   ___  | |
+   \ \/  \/ / _ \ / _ \ | |
+    \  /\  / (_) | (_)  |_|
+     \/  \/ \___/ \___/ (_)
+
+"
+
+echo -e "\033[38;5;${COLOR_CODE}m$banner\033[0m"
+
+echo "The site is up and running at http://${WP_URL}/wp-admin/. Head over there to check it out :)"

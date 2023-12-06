@@ -3,7 +3,10 @@
   "version": "2.0.0",
   "description": "WooCommerce screenshot generator",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "snap:up": "./env/setup.sh",
+    "snap:down": "./env/down.sh"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/woocommerce/woocommerce-snap.git"

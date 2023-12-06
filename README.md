@@ -132,7 +132,7 @@ As an example, if you wanted to test with the upcoming WordPress 5.8 release, yo
 
 For WooCommerce, you can do the following:
 
-1. Find the `Previous Versions` section otowards the bottom of the [Advanced View page](https://wordpress.org/plugins/woocommerce/advanced/) for the WooCommerce plugin.
+1. Find the `Previous Versions` section towards the bottom of the [Advanced View page](https://wordpress.org/plugins/woocommerce/advanced/) for the WooCommerce plugin.
 2. Pick the latest version you'd like to use.
 3. Update `WOOCOMMERCE_VERSION` with the selected version in your `local.env` file.
 

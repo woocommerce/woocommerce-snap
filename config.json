@@ -1,0 +1,14 @@
+{
+    "wordpress_version": "latest",
+    "woocommerce_version": "latest",
+    "plugins": [],
+    "themes": [],
+    "screenshotUrls": [],
+    "shopperUrls": [
+        "shop",
+        "cart"
+    ],
+    "merchantUrls": [
+        "wp-admin/admin.php?page=wc-settings"
+    ]
+}
