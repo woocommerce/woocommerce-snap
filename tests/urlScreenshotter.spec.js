@@ -1,6 +1,4 @@
-// @ts-check
 const { test, expect } = require('@playwright/test');
-
 const config = require('../config.json');
 
 // TODO: add in the site URL and just have them define pages like "Settings", "Shop", etc and we can build the ULRs or they can create them manually
