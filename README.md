@@ -107,7 +107,6 @@ WORDPRESS_DB_USER=wordpress
 WORDPRESS_DB_PASSWORD=wordpress
 WORDPRESS_DB_NAME=wordpress
 WORDPRESS_DEBUG=1
-ABSPATH=/usr/src/wordpress/
 
 # Database
 MYSQL_ROOT_PASSWORD=wordpress

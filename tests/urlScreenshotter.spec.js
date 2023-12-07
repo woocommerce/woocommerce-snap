@@ -6,7 +6,6 @@ const config = require('../config.json');
 for (const url of config.shopperUrls) {
     test(`screenshotting page at ${url}`, async ({ page, browserName }) => {
         const pageVisited = /[^/]*$/.exec(url)[0];
-        console.log(browserName);
         await page.goto(url);
         await page.screenshot({ path: `screenshots/shopper/${browserName}/${pageVisited}-page-screenshot.png`, fullPage: true });
     });

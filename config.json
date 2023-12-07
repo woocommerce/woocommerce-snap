@@ -1,8 +1,12 @@
 {
     "wordpress_version": "latest",
     "woocommerce_version": "latest",
-    "plugins": [],
-    "themes": [],
+    "plugins": [
+        "classic-editor"
+    ],
+    "themes": [
+        "astra"
+    ],
     "screenshotUrls": [],
     "shopperUrls": [
         "shop",
