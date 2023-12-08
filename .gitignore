@@ -24,4 +24,13 @@ env/local.env
 node_modules/
 
 # Screenshots
-screenshots/
+screenshots/*
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+themes/*
+plugins/*
+!plugins/silence-notices.php
+*.zip

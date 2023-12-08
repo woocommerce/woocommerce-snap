@@ -1,0 +1,10 @@
+{
+    "shopperUrls": [
+        "shop",
+        "cart"
+    ],
+    "merchantUrls": [
+        "wp-admin/admin.php?page=wc-settings"
+    ],
+    "fullPageScreenshot": true
+}
