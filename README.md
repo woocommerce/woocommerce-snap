@@ -3,22 +3,19 @@
 WooCommerce snap provides a screenshotting utility for WooCommerce. This utility provides the following features:
 
 * specify WordPress / WooCommerce version
-* specify theme
 * specify one or more URLs to screenshot
-* specify the height/width of the screenshot
-* specify a device (such as mobile, tablet, or desktop)
-* specify a selector to focus the screenshot on
+* install a theme or plugin from a zip file
+* install a WordPress.org theme or plugin from a slug name
 
 ##### Table of Contents  
 
 - [Getting setup](#getting-setup)
+- [Customize screenshot URLs](#customize-screenshot-urls)
+- [Installing themes and plugins](#installing-themes-and-plugins)
 - [Environment configuration ](#environment-configuration)
   - [Testing future releases](#testing-future-releases)
     - [WordPress](#wordpress)
     - [WooCommerce](#woocommerce)
-  - [Plugins](#plugins)
-- [Config settings](#config-settings)
-- [Available commands](#available-commands)
 - [Feedback](#feedback)
 
 
@@ -32,6 +29,14 @@ Once you have those, install dependencies by running:
 npm install
 ```
 
+And finally install the browsers needed with:
+
+```
+npx playwright install
+```
+
+This allows using Firefox, Chrome and Webkit (Safari) for screenshots.
+
 Once complete, spin up the container by running:
 
 ```
@@ -40,15 +45,15 @@ npm run snap:up
 
 Now you can access the site at `http://localhost:8084`. You can also log into the WO Admin at `http://localhost:8084/wp-login.php` with `admin` and `password` as the username and password.
 
-Let's run a few tests!
+Let's get some screenshots!
 
 Run the following command in your terminal:
 
 ```
-npm run snapit-urls
+npm run snap:it
 ```
 
-Once the script finishes, screenshots will be added to the `screenshots` folder. Note that before each run, the `screenshots` folder will be cleared.
+Once the script finishes, screenshots will be added to the `screenshots` folder. Note that before each run, the `screenshots` folder will be cleared. Screenshots are stopped by the flow type (`merchant` and `shopper`) and by browser (`chromium`, `firefox`, `webkit`).
 
 When you're done screenshotting, you can run the following to stop the container:
 
@@ -56,7 +61,61 @@ When you're done screenshotting, you can run the following to stop the container
 npm run snap:down
 ```
 
+**Note**: This will delete everything in the `plugins`, `themes` and `screenshots` folders, so be sure you have anything from there saved that you need!
+
 And that's it!
+
+## Customize screenshot URLs
+
+Edit the `config.json` with any overrides you'd like, for example, you can add more URLs you'd like to screenshot or remove others:
+
+```json
+{
+    "shopperUrls": [
+        "shop",
+        "cart"
+    ],
+    "merchantUrls": [
+        "wp-admin/admin.php?page=wc-settings"
+    ],
+    "fullPageScreenshot": true
+}
+```
+
+* `shopperUrls`: URLs that a shopper to the store might visit.
+* `merchantUrls` Admin views that require a login.
+* `fullPageScreenshot`: Whether or not to take a full page screenshot.
+
+**Note:** URLs just need the end of the path. For example, if you want to screenshot a page at http://localhost:8084/my-account/ you just need to add in `my-account` under shopper URLs:
+
+```json
+{
+    "shopperUrls": [
+        "shop",
+        "cart",
+        "my-account"
+    ],
+}
+```
+
+## Installing themes and plugins
+
+You can additionally pass in any of the following arguments to install additional themes and plugins from zip files or from WordPress.org slugs:
+
+* `--theme` - Installs and activates the theme from provided ZIP file. Example: `--theme=bistro.zip` will install and activate the Bistro theme.
+* `--plugin` - Installs and activates the plugin from the provided ZIP file. Example: `--plugin=woocommerce-bookings.zip` will install and activate WooCommerce Bookings.
+* `--wporg_plugins` - Supports a comma separated list. Example: `--wporg_plugin=classic-editor,contact-form-7` will install and activate both Classic Editor and Contact Form 7.
+* `--wporg_themes` - Supports a comma separated list. Example: `--wporg_themes=go,neve` will install and activate both Go and Neve themes, but it won't activate them.
+
+**Note** When using ZIP files, they need to be placed in this directory (`woocommerce-snap`) for the script to work.
+
+Example command with three options:
+
+```
+npm run snap:up -- --theme=bistro.zip --plugin=woocommerce-bookings.zip --wporg_plugins=classic-editor
+```
+
+This will spin up the site and install and activate the Bistro theme, WooCommerce Bookings, and the Classic Editor plugin.
 
 ## Environment configuration
 
@@ -65,15 +124,13 @@ This project can be ran as-is and will default to the following:
 * The latest WordPress
 * The latest WooCommerce
 * Storefront theme installed and activated
-* A site with "WooCommerce Snap" as the site title
+* A site with "WooCommerce" as the site title
 
 Local setup allows for overriding the above values. To do so, create a file called `local.env` in the `env` folder with the required and optional values below:
 
 ```bash
 WORDPRESS_VERSION=<desired target WordPress version> # for example, WORDPRESS_VERSION="5.7.2"
-WOOCOMMERCE_VERSION=<desired target WooCommerce version> # for example, WOOCOMMERCE_VERSION="5.2.0"
-SITE_TITLE=<desired site title> # for example, SITE_TITLE="Demo Store"
-SITE_THEME=<slug of desired theme> # for example, SITE_THEME="twenty-twenty-one"
+WOOCOMMERCE_VERSION=<desired target WooCommerce version> # for example, WOOCOMMERCE_VERSION="8.2.0"
 ```
 
 The setup script also requires the following env variables to be configured in `local.env` if using a local setup:
@@ -96,10 +153,7 @@ These can just be copied over from the `default.env` file if no changes are need
 
 ```bash
 WORDPRESS_VERSION="5.7.2"
-WOOCOMMERCE_VERSION="5.2.0"
-
-SITE_TITLE="WooCommerce Snap - Local Env"
-SITE_THEME="astra"
+WOOCOMMERCE_VERSION="8.2.0"
 
 # WordPress
 WORDPRESS_DB_HOST=db:3306
@@ -136,79 +190,6 @@ For WooCommerce, you can do the following:
 3. Update `WOOCOMMERCE_VERSION` with the selected version in your `local.env` file.
 
 For example, you could use `WOOCOMMERCE_VERSION="5.5.0-rc.1"` to test the latest RC of the 5.5 release.
-
-## Default settings
-
-Edit the `capture/config/default.json` with any overrides you'd like. Of note, the following fields affect how screenshots are taken:
-
-```json
-{
-  "screenshotUrls": [
-    {
-      "url": "wp-admin/edit.php?post_type=shop_coupon",
-      "name": "coupons"
-    },
-    {
-      "url": "wp-admin/admin.php?page=wc-admin&path=%2Fanalytics%2Foverview",
-      "name": "analytics-overview"
-    }
-  ],
-  "viewport": {
-    "width": 1280,
-    "height": 720
-  },
-  "deviceViewport": {
-    "enabled": false,
-    "device": "iPhone 6"
-  },
-  "fullPageScreenshot": false
-}
-```
-
-* `screenshotUrls`: Determines the URL(s) to load and screenshot. Supply the URL to load in the `url` field and the `name` field, which is used for the screenshot file name.
-* `viewport` is the viewport size of the browser, supply any height or width you'd like.
-* `deviceViewport` is a device specifc viewport size and the option to enable to disable it.
-  * A full list of devices that are supported can be found [here](https://github.com/puppeteer/puppeteer/blob/5e21ba3cbbe455317158e6a4fc5af2808abd45df/lib/DeviceDescriptors.js).
-* `fullPageScreenshot` can be used to enable/disable taking a full page screenshot. If enabled, the `viewport` will be ignored.
-
-## Available commands
-
-You can run any of the following commands. Note that using `-dev` opens the browser in non-headless mode so you can watch as the automation runs.
-
-### URLs
-
-Use these commands to take screenshots of URLs provided in the `capture/config/default.json` file.
-
-```
-snap:urls
-snap:urls-dev
-```
-
-### Merchant
-
-```
-snap:merchant
-snap:merchant-dev
-```
-
-### Shopper
-
-```
-snap:shopper
-snap:shopper-dev
-```
-
-**Using workflows**
-
-Both the Merchant and Shopper flows provide workflows that can be built rather than just visiting URLs. Please see the [Workflows page](docs/workflows.md) for more details on building workflows for screenshots.
-
-## Screenshot methods
-
-`takeScreenshot()` - takes a screenshot of the page and saves it to the `screenshots` folder. A full page screenshot is taken if `fullPageScreenshot` is set to `true` in `default.json`.
-
-`screenshotDOMElement()` - takes a screenshot of the DOM element and saves it to the `screenshots` folder. Parameters include: `name` for the screenshot file name, `selector` for the DOM element to screenshot, and optional `padding` around the selector.
-
-`screenshotBuffer()` - returns a base64 encoded screenshot of the provided URL. Implemented for potential use in an API to gather screenshots.
 
 ## Feedback
 

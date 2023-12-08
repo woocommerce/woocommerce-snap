@@ -1,18 +1,10 @@
 {
-    "wordpress_version": "latest",
-    "woocommerce_version": "latest",
-    "plugins": [
-        "classic-editor"
-    ],
-    "themes": [
-        "astra"
-    ],
-    "screenshotUrls": [],
     "shopperUrls": [
         "shop",
         "cart"
     ],
     "merchantUrls": [
         "wp-admin/admin.php?page=wc-settings"
-    ]
+    ],
+    "fullPageScreenshot": true
 }

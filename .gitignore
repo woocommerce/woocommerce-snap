@@ -32,3 +32,5 @@ screenshots/*
 
 themes/*
 plugins/*
+!plugins/silence-notices.php
+*.zip

@@ -1,8 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const config = require('../config.json');
 
-// TODO: add in the site URL and just have them define pages like "Settings", "Shop", etc and we can build the ULRs or they can create them manually
-
 for (const url of config.shopperUrls) {
     test(`screenshotting page at ${url}`, async ({ page, browserName }) => {
         const pageVisited = /[^/]*$/.exec(url)[0];
@@ -13,6 +11,7 @@ for (const url of config.shopperUrls) {
 
 for (const url of config.merchantUrls) {
     test(`screenshotting page at ${url}`, async ({ page, browserName }) => {
+        // First, we need to log in.
         await page.goto( `/wp-admin`, { waitUntil: 'networkidle' } );
         await page
             .locator( 'input[name="log"]' )
@@ -29,8 +28,9 @@ for (const url of config.merchantUrls) {
             'Dashboard'
         );
 
+        // Now, let's get the page we're visiting for the URL, visit the page, and get a full page screenshot.
         const pageVisited = /[^/]*$/.exec(url)[0];
         await page.goto(url);
-        await page.screenshot({ path: `screenshots/merchant/${browserName}/${pageVisited}-page-screenshot.png`, fullPage: true });
+        await page.screenshot({ path: `screenshots/merchant/${browserName}/${pageVisited}-page-screenshot.png`, fullPage: config.fullPageScreenshot });
     });
 }
