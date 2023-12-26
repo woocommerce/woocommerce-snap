@@ -4,7 +4,8 @@
         "cart"
     ],
     "merchantUrls": [
-        "wp-admin/admin.php?page=wc-settings"
+        "wp-admin/admin.php?page=wc-settings",
+        "wp-admin/plugins.php"
     ],
     "fullPageScreenshot": true
 }
